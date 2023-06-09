@@ -12,4 +12,18 @@ const validateTaskId = (req, res, next) => {
   next();
 };
 
-module.exports = validateTaskId;
+const validateTaskDeletion = (req, res, next) => {
+  const { userId, taskId } = req.params;
+
+  if (!Number.isInteger(Number(userId)) || !Number.isInteger(Number(taskId))) {
+    return res.status(422).json({ 
+      message: 'userId e taskId devem ser um número inteiro' 
+    });
+  }
+  next();
+};
+
+module.exports = {
+  validateTaskId,
+  validateTaskDeletion
+};

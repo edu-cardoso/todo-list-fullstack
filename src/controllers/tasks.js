@@ -33,9 +33,30 @@ const getAllTasks = async (req, res) => {
   return res.status(200).json(tasks);
 };
 
+const deleteTask = async (req, res) => {
+  try {
+    const { userId, taskId } = req.params;
+
+    const deletedTask = await taskService.deleteTask({ userId, taskId });
+
+    if(!deletedTask) {
+      return res.status(401).json({ 
+        message: 'Task não encontrada' 
+      });
+    }
+    return res.status(204).json(deletedTask);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Erro interno' });
+  }
+};
+
+
+
 
 
 module.exports = {
   createTask,
-  getAllTasks
+  getAllTasks,
+  deleteTask
 }
