@@ -1,12 +1,13 @@
 const bcrypt = require('bcryptjs');
-const { User } = require('../models');
+const { User, Task } = require('../models');
 
-
-const getByUserEmail = (email) => User.findOne({ where: { email } });
+const getByUserEmail = (email) => User.findOne({
+  where: { email },
+});
 
 const createUser = async ({ email, password }) => {
   const user = await getByUserEmail(email);
-  
+
   if(user) {
     return true
   }
