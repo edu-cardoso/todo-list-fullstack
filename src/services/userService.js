@@ -7,7 +7,9 @@ const createUser = ({ email, password }) => {
   return User.create({ email, password: hashPassword });
 };
 
+const getByUserEmail = (email) => User.findOne({ where: { email } });
 
 module.exports = {
   createUser,
+  getByUserEmail,
 }
