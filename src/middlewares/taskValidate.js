@@ -12,7 +12,7 @@ const validateTaskId = (req, res, next) => {
   next();
 };
 
-const validateTaskDeletion = (req, res, next) => {
+const validateTaskAndUserId = (req, res, next) => {
   const { userId, taskId } = req.params;
 
   if (!Number.isInteger(Number(userId)) || !Number.isInteger(Number(taskId))) {
@@ -23,7 +23,19 @@ const validateTaskDeletion = (req, res, next) => {
   next();
 };
 
+const validateTaskName = (req, res, next) => {
+  const { taskName } = req.body;
+
+  if (!taskName) {
+    return res.status(422).json({ 
+      message: 'O campo taskName é obrigatório' 
+    });
+  }
+  next();
+};
+
 module.exports = {
   validateTaskId,
-  validateTaskDeletion
+  validateTaskAndUserId,
+  validateTaskName
 };

@@ -41,22 +41,43 @@ const deleteTask = async (req, res) => {
 
     if(!deletedTask) {
       return res.status(401).json({ 
-        message: 'Task não encontrada' 
+        message: 'Tarefa não encontrada' 
       });
     }
-    return res.status(204).json(deletedTask);
+    return res.status(204).json({
+      message: 'Tarefa deletada com sucesso'
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'Erro interno' });
   }
 };
 
+const updateTask = async (req, res) => {
+  try {
+    const { userId, taskId } = req.params;
+    const { taskName } = req.body;
 
+    const updatedTask = await taskService.updateTask({ userId, taskId, taskName });
 
+    if(!updatedTask) {
+      return res.status(401).json({ 
+        message: 'Tarefa não encontrada' 
+      });
+    }
 
+    return res.status(201).json({ 
+      message: 'Tarefa atualizada com sucesso'
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Erro interno' });
+  }
+};
 
 module.exports = {
   createTask,
   getAllTasks,
-  deleteTask
+  deleteTask,
+  updateTask
 }
