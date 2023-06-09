@@ -10,7 +10,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      task_name:{
+      taskName:{
         type: Sequelize.STRING,
         allowNull: false,
       },

@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     'Task',
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-      task_name: DataTypes.STRING,
+      taskName: DataTypes.STRING,
       userId: DataTypes.INTEGER,
     },
     {
