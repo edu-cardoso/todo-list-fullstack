@@ -1,26 +1,26 @@
 /**
  *
  * @param {import('sequelize').Sequelize} sequelize
- * @param {*} DataTypes
+ * @param {import('sequelize').DataTypes} DataTypes 
  * @returns
  */
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    'User',
+  const Task = sequelize.define(
+    'Task',
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
+      task_name: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
     },
     {
       timestamps: false,
-      tableName: 'Users',
+      tableName: 'Tasks',
     });
-    User.associate = (models) => {
-      User.hasMany(models.Task, {
+    Task.associate = (models) => {
+      Task.belongsTo(models.User, {
         foreignKey: 'userId',
-        as: 'tasks'
+        as: 'user'
       })
     };
-  return User;
+  return Task;
 };
