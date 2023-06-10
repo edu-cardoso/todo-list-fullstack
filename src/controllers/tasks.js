@@ -27,7 +27,7 @@ const getAllTasks = async (req, res) => {
 
   if(tasks.length === 0) {
     return res.status(401).json({ 
-      message: 'Nenhuma task encontrada' });
+      message: 'Nenhuma tarefa encontrada' });
   }
 
   return res.status(200).json(tasks);
@@ -59,7 +59,7 @@ const updateTask = async (req, res) => {
     const { taskName } = req.body;
 
     const updatedTask = await taskService.updateTask({ userId, taskId, taskName });
-
+    console.log(updatedTask)
     if(!updatedTask) {
       return res.status(401).json({ 
         message: 'Tarefa não encontrada' 
