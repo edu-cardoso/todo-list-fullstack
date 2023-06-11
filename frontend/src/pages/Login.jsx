@@ -1,11 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [user, setUser] = useState({
     email: '',
     password: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -20,9 +23,14 @@ export default function Login() {
       event.preventDefault();
 
       const request = await axios.post(
-        'http://localhost:5000/users',
+        'http://localhost:5000/login',
         user
       );
+
+      if(request.status === 200) {
+        navigate('/tasks');
+        localStorage.setItem('token', request.data.token);
+      }
 
       console.log(request)
     } catch (err) {
