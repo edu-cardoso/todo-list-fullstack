@@ -1,13 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-export default function Register() {
+export default function Login() {
   const [user, setUser] = useState({
     email: '',
     password: ''
   });
-  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,10 +24,7 @@ export default function Register() {
         user
       );
 
-      if(request.status === 201) {
-        alert('Cadastro realizado com sucesso');
-        setTimeout(navigate('/login'), 4000)
-      }
+      console.log(request)
     } catch (err) {
       console.log(err)
     }
@@ -37,7 +32,7 @@ export default function Register() {
  
   return (
     <div>
-      <h4>Cadastrar</h4>
+      <h4>Entrar</h4>
       <form onSubmit={ handleSubmit }>
         <label>
           Email
@@ -58,7 +53,7 @@ export default function Register() {
             />
         </label>
         <button>
-          Criar conta
+          Entrar
         </button>
       </form>
     </div>
