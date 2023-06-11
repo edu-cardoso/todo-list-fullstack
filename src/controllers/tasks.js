@@ -59,7 +59,6 @@ const updateTask = async (req, res) => {
     const { taskName } = req.body;
 
     const updatedTask = await taskService.updateTask({ userId, taskId, taskName });
-    console.log(updatedTask)
     if(!updatedTask) {
       return res.status(401).json({ 
         message: 'Tarefa não encontrada' 
