@@ -19,10 +19,12 @@ export default function Register() {
     try {
       event.preventDefault();
 
-      await axios.post(
+      const request = await axios.post(
         'http://localhost:5000/users',
         user
       );
+
+      console.log(request)
     } catch (err) {
       console.log(err)
     }

@@ -6,7 +6,7 @@ const createUser = async (req, res) => {
   const user = await userService.createUser({ email, password });
 
   if(user === true) {
-    return res.status(201).json({
+    return res.status(400).json({
       message: 'Esse email já possui cadastro', 
     });
   }
