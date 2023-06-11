@@ -1,7 +1,16 @@
+import { Route, Routes } from "react-router-dom";
+import Register from "./pages/Register";
+
 function App() {
   return (
     <>
-      <h1>teste</h1>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={<Register />}
+        />
+      </Routes>
     </>
   )
 }

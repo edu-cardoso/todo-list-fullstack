@@ -2,6 +2,7 @@ const userService  = require('../services/userService');
 
 const createUser = async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
   const user = await userService.createUser({ email, password });
 
   if(user === true) {
@@ -15,6 +16,7 @@ const createUser = async (req, res) => {
     user: email
   });
 }
+
 
 module.exports = {
   createUser,

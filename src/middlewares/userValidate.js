@@ -3,9 +3,9 @@ const validateEmail = (email) => {
   return regex.test(email);
 }
 
-
 const validateUser = (req, res, next) => {
   const { email, password } = req.body;
+  console.log(req.body);
   if(!validateEmail(email)) {
     return res.status(400).json({ 
       "message": "Insira um email com formato válido" 
