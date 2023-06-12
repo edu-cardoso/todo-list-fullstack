@@ -55,6 +55,18 @@
   font-size: 1.4rem;
 }
 
+.linkLogin {
+  font-size: 1.6rem;
+  color: rgb(204, 204, 204);
+  margin-bottom: 1rem;
+}
+
+.linkLogin a {
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #8284FA
+}
+
 .registerBtn {
   border: none;
   border-radius: 5px;
@@ -65,3 +77,4 @@
   color: white;
   background-color: #1E6F9F;
 }
+

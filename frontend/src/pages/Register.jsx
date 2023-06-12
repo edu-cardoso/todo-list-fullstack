@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "../styles/Register.module.css";
 import Logo from "../assets/Logo.svg"
 
@@ -77,6 +77,9 @@ export default function Register() {
             placeholder="Digite sua senha"
           />
         </div>
+        <p className={styles.linkLogin}>Já possui cadastro ? 
+          <Link to="/login"> Entrar</Link> 
+        </p>
         <button className={styles.registerBtn}>
           Criar conta
         </button>
