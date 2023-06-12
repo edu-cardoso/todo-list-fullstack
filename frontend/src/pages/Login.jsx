@@ -29,9 +29,12 @@ export default function Register() {
         user
       );
 
+      console.log(request);
+
       if (request.status === 200) {
         navigate('/tasks')
         localStorage.setItem('token', request.data.token);
+        localStorage.setItem('userId', request.data.userId);
       }
 
     } catch (err) {
