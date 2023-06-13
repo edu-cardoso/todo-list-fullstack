@@ -99,6 +99,7 @@ export default function Tasks() {
 
   return (
     <div>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
       <input
         type="text"
         value={inputTask}
@@ -108,11 +109,13 @@ export default function Tasks() {
         editMode ?
           <button
             onClick={() => updateTask(userId, taskToEdit)}
+            disabled={inputTask.length < 3}
           >
             Editar
           </button> :
           <button
             onClick={createTask}
+            disabled={inputTask.length < 3}
           >
             Criar
           </button>
@@ -126,12 +129,16 @@ export default function Tasks() {
               setTaskToEdit(id);
             }}
           >
-            Editar
+            <span className="material-symbols-outlined">
+              edit_note
+            </span>
           </button>
           <button
             onClick={() => deleteTask(userId, id)}
           >
-            Excluir
+            <span className="material-symbols-outlined">
+              delete
+            </span>
           </button>
         </div>
       ))}
