@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import styles from "../styles/Tasks.module.css";
+import Logo from "../assets/Logo.svg";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -98,48 +100,56 @@ export default function Tasks() {
   }, [])
 
   return (
-    <div>
+    <div className={styles.container}>
+      <img src={Logo} className={styles.logo} />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
-      <input
-        type="text"
-        value={inputTask}
-        onChange={handleInputChange}
-      />
-      {
-        editMode ?
-          <button
-            onClick={() => updateTask(userId, taskToEdit)}
-            disabled={inputTask.length < 3}
-          >
-            Editar
-          </button> :
-          <button
-            onClick={createTask}
-            disabled={inputTask.length < 3}
-          >
-            Criar
-          </button>
-      }
+      <div className={styles.inputTask}>
+        <input
+          type="text"
+          value={inputTask}
+          onChange={handleInputChange}
+          placeholder="Adicione uma nova tarefa"
+        />
+        {
+          editMode ?
+            <button
+              onClick={() => updateTask(userId, taskToEdit)}
+              disabled={inputTask.length < 3}
+              className={styles.editTaskBtn}
+            >
+              Editar
+            </button> :
+            <button
+              onClick={createTask}
+              disabled={inputTask.length < 3}
+              className={styles.createTaskBtn}
+            >
+              Criar
+            </button>
+        }
+      </div>
       {tasks.map(({ id, taskName, userId }) => (
-        <div key={id}>
+        <div key={id} className={styles.tasks}>
           <p>{taskName}</p>
-          <button
-            onClick={() => {
-              setEditMode(true);
-              setTaskToEdit(id);
-            }}
-          >
-            <span className="material-symbols-outlined">
-              edit_note
-            </span>
-          </button>
-          <button
-            onClick={() => deleteTask(userId, id)}
-          >
-            <span className="material-symbols-outlined">
-              delete
-            </span>
-          </button>
+          <div className={styles.taskBtnsContainer}>
+            <button
+              onClick={() => {
+                setEditMode(true);
+                setTaskToEdit(id);
+              }}
+            >
+              <span className="material-symbols-outlined">
+                edit_note
+              </span>
+            </button>
+            <button
+              onClick={() => deleteTask(userId, id)}
+            >
+              <span className="material-symbols-outlined">
+                delete
+              </span>
+            </button>
+          </div>
         </div>
       ))}
     </div>

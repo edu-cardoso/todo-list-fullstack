@@ -1,0 +1,83 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 3rem;
+}
+
+.logo {
+  width: 17rem;
+  margin-bottom: 2.5rem;
+}
+
+.inputTask {
+  display: flex;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.inputTask input {
+  width: 100%;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  padding: 1rem;
+  outline: none;
+  background-color: aliceblue;
+  font-size: 1.4rem;
+}
+
+.editTaskBtn {
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: #d4a200;
+  color: white;
+  font-size: 1.4rem;
+  padding: 1rem;
+}
+.createTaskBtn {
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: #1E6F9F;
+  color: white;
+  font-size: 1.4rem;
+  padding: 1rem;
+}
+
+.tasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #262626;
+  border: 1px solid #333333;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+}
+
+.taskBtnsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 20%;
+  margin-left: 1rem;
+}
+
+.tasks p {
+  color: white;
+  font-size: 1.6rem;
+  word-break: break-all;
+}
+
+.tasks button {
+  border: none;
+  background: none;
+}
+
+.tasks span {
+  border: none;
+  background: none;
+  color: #8284FA;
+  font-size: 2.5rem;
+}
