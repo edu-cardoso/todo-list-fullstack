@@ -64,8 +64,13 @@ export default function Tasks() {
           }
         }
       );
-
-      await getTasks();
+      
+      if(tasks.length > 1) {
+        await getTasks();
+      } else {
+        setTasks([])
+      }
+      
 
     } catch (err) {
       console.log(err)

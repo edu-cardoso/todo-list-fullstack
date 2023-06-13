@@ -9,7 +9,7 @@ const getAllTasks = async (userId) => await Task.findAll({
   where: { userId }
 });
 
-const deleteTask = ({ userId, taskId }) => Task.destroy({ 
+const deleteTask = async ({ userId, taskId }) => await Task.destroy({ 
   where: { userId, id: taskId }
 });
 
