@@ -44,9 +44,7 @@ const deleteTask = async (req, res) => {
         message: 'Tarefa não encontrada' 
       });
     }
-    return res.status(204).json({
-      message: 'Tarefa deletada com sucesso'
-    });
+    return res.status(204).json();
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'Erro interno' });
