@@ -2,9 +2,11 @@
   "name": "todo-list-fullstack",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.js",
+  "main": "src/server.ts",
   "scripts": {
-    "dev": "nodemon src/server.js",
+    "dev": "nodemon",
+    "build": "npx tsc",
+    "db:reset": "npx tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

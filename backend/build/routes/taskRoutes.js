@@ -1,0 +1,11 @@
+"use strict";
+var express = require('express');
+var taskRoutes = express.Router();
+var _a = require('../controllers/tasks'), createTask = _a.createTask, getAllTasks = _a.getAllTasks, deleteTask = _a.deleteTask, updateTask = _a.updateTask;
+var validateJwt = require('../middlewares/jwtValidate');
+var _b = require('../middlewares/taskValidate'), validateTaskId = _b.validateTaskId, validateTaskAndUserId = _b.validateTaskAndUserId, validateTaskName = _b.validateTaskName;
+taskRoutes.get('/:id', validateTaskId, getAllTasks);
+taskRoutes.post('/', validateJwt, createTask);
+taskRoutes.put('/:userId/:taskId', validateJwt, validateTaskAndUserId, validateTaskName, updateTask);
+taskRoutes.delete('/:userId/:taskId', validateJwt, validateTaskAndUserId, deleteTask);
+module.exports = taskRoutes;
