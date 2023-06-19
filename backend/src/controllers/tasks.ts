@@ -1,14 +1,11 @@
-const taskService = require('../services/taskService');
+import { Request, Response } from 'express';
+import taskService from '../services/taskService';
 
-const createTask = async (req, res) => {
+const createTask = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { taskName } = req.body;
-    const payload = req.payload;
-
-    const task = await taskService.createTask({ 
-      taskName,
-      userId: payload.data.userId 
-    });
+    const { taskName, userId } = req.body;
+    
+    const task = await taskService.createTask(taskName, userId);
 
     return res.status(200).json({ 
       message: 'Tarefa criada com sucesso', 
@@ -16,14 +13,14 @@ const createTask = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: 'Erro interno' });
+    return res.status(500).json({ message: 'Erro interno' });
   }
 };
 
-const getAllTasks = async (req, res) => {
+const getAllTasks = async (req: Request, res: Response): Promise<Response> => {
   const { id } = req.params;
 
-  const tasks = await taskService.getAllTasks(id);
+  const tasks = await taskService.getAllTasks(Number(id));
 
   if(tasks.length === 0) {
     return res.status(401).json({ 
@@ -33,11 +30,11 @@ const getAllTasks = async (req, res) => {
   return res.status(200).json(tasks);
 };
 
-const deleteTask = async (req, res) => {
+const deleteTask = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { userId, taskId } = req.params;
 
-    const deletedTask = await taskService.deleteTask({ userId, taskId });
+    const deletedTask = await taskService.deleteTask(Number(userId), Number(taskId));
 
     if(!deletedTask) {
       return res.status(401).json({ 
@@ -47,16 +44,16 @@ const deleteTask = async (req, res) => {
     return res.status(204).json();
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: 'Erro interno' });
+    return res.status(500).json({ message: 'Erro interno' });
   }
 };
 
-const updateTask = async (req, res) => {
+const updateTask = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { userId, taskId } = req.params;
     const { taskName } = req.body;
 
-    const updatedTask = await taskService.updateTask({ userId, taskId, taskName });
+    const updatedTask = await taskService.updateTask(Number(userId), Number(taskId), taskName);
     if(!updatedTask) {
       return res.status(401).json({ 
         message: 'Tarefa não encontrada' 
@@ -68,11 +65,11 @@ const updateTask = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: 'Erro interno' });
+    return res.status(500).json({ message: 'Erro interno' });
   }
 };
 
-module.exports = {
+export {
   createTask,
   getAllTasks,
   deleteTask,

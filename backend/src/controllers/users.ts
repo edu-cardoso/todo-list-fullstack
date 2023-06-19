@@ -1,9 +1,10 @@
-const userService  = require('../services/userService');
+import { Request, Response } from 'express';
+import userService from '../services/userService'
 
-const createUser = async (req, res) => {
+const createUser = async (req: Request, res: Response): Promise<Response> => {
   const { email, password } = req.body;
-  console.log(req.body);
-  const user = await userService.createUser({ email, password });
+ 
+  const user = await userService.createUser(email, password);
 
   if(user === true) {
     return res.status(400).json({
@@ -18,6 +19,6 @@ const createUser = async (req, res) => {
 }
 
 
-module.exports = {
+export {
   createUser,
 }
