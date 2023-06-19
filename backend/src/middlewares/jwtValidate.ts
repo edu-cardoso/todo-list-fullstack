@@ -1,14 +1,14 @@
-const { verifyToken } = require('../utils/authFunctions');
+import { Request, Response, NextFunction } from 'express';
+import { verifyToken } from '../utils/authFunctions';
 
-const validateJwt = (req, res, next) => {
+const validateJwt = (req: Request, res: Response, next: NextFunction) => {
   try {
     const { authorization: token } = req.headers;
     if (!token)
       return res.status(401).json({ message: 'Token não encontrado' });
 
-    const payload = verifyToken(token);
-    req.payload = payload;
-
+    verifyToken(token);
+    
     next();
   } catch (error) {
     console.log(error);
@@ -16,4 +16,6 @@ const validateJwt = (req, res, next) => {
   }
 };
 
-module.exports = validateJwt;
+export {
+  validateJwt
+};

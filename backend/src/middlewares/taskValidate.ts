@@ -1,4 +1,6 @@
-const validateTaskId = (req, res, next) => {
+import { Request, Response, NextFunction } from 'express';
+
+const validateTaskId = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
 
   if (!id || id === '') {
@@ -12,7 +14,7 @@ const validateTaskId = (req, res, next) => {
   next();
 };
 
-const validateTaskAndUserId = (req, res, next) => {
+const validateTaskAndUserId = (req: Request, res: Response, next: NextFunction) => {
   const { userId, taskId } = req.params;
 
   if (!Number.isInteger(Number(userId)) || !Number.isInteger(Number(taskId))) {
@@ -23,7 +25,7 @@ const validateTaskAndUserId = (req, res, next) => {
   next();
 };
 
-const validateTaskName = (req, res, next) => {
+const validateTaskName = (req: Request, res: Response, next: NextFunction) => {
   const { taskName } = req.body;
 
   if (!taskName) {
@@ -34,7 +36,7 @@ const validateTaskName = (req, res, next) => {
   next();
 };
 
-module.exports = {
+export {
   validateTaskId,
   validateTaskAndUserId,
   validateTaskName
