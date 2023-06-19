@@ -35,7 +35,8 @@ export default function Tasks() {
       await axios.post(
         'http://localhost:5000/tasks',
         {
-          taskName: inputTask
+          taskName: inputTask,
+          userId
         },
         {
           headers: {

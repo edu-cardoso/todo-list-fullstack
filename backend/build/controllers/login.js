@@ -35,33 +35,36 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var bcrypt = require('bcryptjs');
-var createToken = require('../utils/authFunctions').createToken;
-var userService = require('../services/userService');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.login = void 0;
+var bcryptjs_1 = __importDefault(require("bcryptjs"));
+var authFunctions_1 = require("../utils/authFunctions");
+var userService_1 = __importDefault(require("../services/userService"));
 var login = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, email, password, user, token;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _a = req.body, email = _a.email, password = _a.password;
-                return [4 /*yield*/, userService.getByUserEmail(email)];
+                return [4 /*yield*/, userService_1.default.getByUserEmail(email)];
             case 1:
                 user = _b.sent();
-                if (!user || !bcrypt.compareSync(password, user.password)) {
+                if (!user || !bcryptjs_1.default.compareSync(password, user.dataValues.password)) {
                     return [2 /*return*/, res.status(401).json({ message: 'usuário inexistente ou senha inválida' })];
                 }
-                token = createToken({
-                    userId: user.id,
-                    email: user.email
+                token = (0, authFunctions_1.createToken)({
+                    userId: user.dataValues.id,
+                    email: user.dataValues.email
                 });
                 return [2 /*return*/, res.status(200).json({
-                        userId: user.id,
-                        email: user.email,
+                        userId: user.dataValues.id,
+                        email: user.dataValues.email,
                         token: token
                     })];
         }
     });
 }); };
-module.exports = {
-    login: login,
-};
+exports.login = login;

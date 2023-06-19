@@ -35,15 +35,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var userService = require('../services/userService');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createUser = void 0;
+var userService_1 = __importDefault(require("../services/userService"));
 var createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, email, password, user;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _a = req.body, email = _a.email, password = _a.password;
-                console.log(req.body);
-                return [4 /*yield*/, userService.createUser({ email: email, password: password })];
+                return [4 /*yield*/, userService_1.default.createUser(email, password)];
             case 1:
                 user = _b.sent();
                 if (user === true) {
@@ -58,6 +62,4 @@ var createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
         }
     });
 }); };
-module.exports = {
-    createUser: createUser,
-};
+exports.createUser = createUser;

@@ -1,11 +1,12 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.validateUser = void 0;
 var validateEmail = function (email) {
     var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 };
 var validateUser = function (req, res, next) {
     var _a = req.body, email = _a.email, password = _a.password;
-    console.log(req.body);
     if (!validateEmail(email)) {
         return res.status(400).json({
             "message": "Insira um email com formato válido"
@@ -18,4 +19,4 @@ var validateUser = function (req, res, next) {
     }
     next();
 };
-module.exports = validateUser;
+exports.validateUser = validateUser;

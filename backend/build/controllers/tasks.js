@@ -35,41 +35,42 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var taskService = require('../services/taskService');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateTask = exports.deleteTask = exports.getAllTasks = exports.createTask = void 0;
+var taskService_1 = __importDefault(require("../services/taskService"));
 var createTask = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var taskName, payload, task, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a, taskName, userId, task, error_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                taskName = req.body.taskName;
-                payload = req.payload;
-                return [4 /*yield*/, taskService.createTask({
-                        taskName: taskName,
-                        userId: payload.data.userId
-                    })];
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, taskName = _a.taskName, userId = _a.userId;
+                return [4 /*yield*/, taskService_1.default.createTask(taskName, userId)];
             case 1:
-                task = _a.sent();
+                task = _b.sent();
                 return [2 /*return*/, res.status(200).json({
                         message: 'Tarefa criada com sucesso',
                         task: task,
                     })];
             case 2:
-                error_1 = _a.sent();
+                error_1 = _b.sent();
                 console.log(error_1);
-                res.status(500).json({ message: 'Erro interno' });
-                return [3 /*break*/, 3];
+                return [2 /*return*/, res.status(500).json({ message: 'Erro interno' })];
             case 3: return [2 /*return*/];
         }
     });
 }); };
+exports.createTask = createTask;
 var getAllTasks = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, tasks;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 id = req.params.id;
-                return [4 /*yield*/, taskService.getAllTasks(id)];
+                return [4 /*yield*/, taskService_1.default.getAllTasks(Number(id))];
             case 1:
                 tasks = _a.sent();
                 if (tasks.length === 0) {
@@ -81,6 +82,7 @@ var getAllTasks = function (req, res) { return __awaiter(void 0, void 0, void 0,
         }
     });
 }); };
+exports.getAllTasks = getAllTasks;
 var deleteTask = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, userId, taskId, deletedTask, error_2;
     return __generator(this, function (_b) {
@@ -88,7 +90,7 @@ var deleteTask = function (req, res) { return __awaiter(void 0, void 0, void 0, 
             case 0:
                 _b.trys.push([0, 2, , 3]);
                 _a = req.params, userId = _a.userId, taskId = _a.taskId;
-                return [4 /*yield*/, taskService.deleteTask({ userId: userId, taskId: taskId })];
+                return [4 /*yield*/, taskService_1.default.deleteTask(Number(userId), Number(taskId))];
             case 1:
                 deletedTask = _b.sent();
                 if (!deletedTask) {
@@ -100,12 +102,12 @@ var deleteTask = function (req, res) { return __awaiter(void 0, void 0, void 0, 
             case 2:
                 error_2 = _b.sent();
                 console.log(error_2);
-                res.status(500).json({ message: 'Erro interno' });
-                return [3 /*break*/, 3];
+                return [2 /*return*/, res.status(500).json({ message: 'Erro interno' })];
             case 3: return [2 /*return*/];
         }
     });
 }); };
+exports.deleteTask = deleteTask;
 var updateTask = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, userId, taskId, taskName, updatedTask, error_3;
     return __generator(this, function (_b) {
@@ -114,7 +116,7 @@ var updateTask = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 _b.trys.push([0, 2, , 3]);
                 _a = req.params, userId = _a.userId, taskId = _a.taskId;
                 taskName = req.body.taskName;
-                return [4 /*yield*/, taskService.updateTask({ userId: userId, taskId: taskId, taskName: taskName })];
+                return [4 /*yield*/, taskService_1.default.updateTask(Number(userId), Number(taskId), taskName)];
             case 1:
                 updatedTask = _b.sent();
                 if (!updatedTask) {
@@ -128,15 +130,9 @@ var updateTask = function (req, res) { return __awaiter(void 0, void 0, void 0, 
             case 2:
                 error_3 = _b.sent();
                 console.log(error_3);
-                res.status(500).json({ message: 'Erro interno' });
-                return [3 /*break*/, 3];
+                return [2 /*return*/, res.status(500).json({ message: 'Erro interno' })];
             case 3: return [2 /*return*/];
         }
     });
 }); };
-module.exports = {
-    createTask: createTask,
-    getAllTasks: getAllTasks,
-    deleteTask: deleteTask,
-    updateTask: updateTask
-};
+exports.updateTask = updateTask;

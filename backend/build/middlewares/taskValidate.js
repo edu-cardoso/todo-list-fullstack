@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.validateTaskName = exports.validateTaskAndUserId = exports.validateTaskId = void 0;
 var validateTaskId = function (req, res, next) {
     var id = req.params.id;
     if (!id || id === '') {
@@ -9,6 +11,7 @@ var validateTaskId = function (req, res, next) {
     }
     next();
 };
+exports.validateTaskId = validateTaskId;
 var validateTaskAndUserId = function (req, res, next) {
     var _a = req.params, userId = _a.userId, taskId = _a.taskId;
     if (!Number.isInteger(Number(userId)) || !Number.isInteger(Number(taskId))) {
@@ -18,6 +21,7 @@ var validateTaskAndUserId = function (req, res, next) {
     }
     next();
 };
+exports.validateTaskAndUserId = validateTaskAndUserId;
 var validateTaskName = function (req, res, next) {
     var taskName = req.body.taskName;
     if (!taskName) {
@@ -27,8 +31,4 @@ var validateTaskName = function (req, res, next) {
     }
     next();
 };
-module.exports = {
-    validateTaskId: validateTaskId,
-    validateTaskAndUserId: validateTaskAndUserId,
-    validateTaskName: validateTaskName
-};
+exports.validateTaskName = validateTaskName;

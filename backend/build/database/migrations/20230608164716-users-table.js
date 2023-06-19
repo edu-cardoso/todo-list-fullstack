@@ -35,59 +35,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Task_1 = __importDefault(require("../database/models/Task"));
-var createTask = function (taskName, userId) { return __awaiter(void 0, void 0, void 0, function () {
-    var dataValues;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, Task_1.default.create({
-                    taskName: taskName,
-                    userId: userId
-                })];
-            case 1:
-                dataValues = (_a.sent()).dataValues;
-                return [2 /*return*/, dataValues];
-        }
-    });
-}); };
-var getAllTasks = function (userId) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, Task_1.default.findAll({
-                    where: { userId: userId }
-                })];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-var deleteTask = function (userId, taskId) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, Task_1.default.destroy({
-                    where: { userId: userId, id: taskId }
-                })];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-var updateTask = function (userId, taskId, taskName) { return __awaiter(void 0, void 0, void 0, function () {
-    var updatedTask;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, Task_1.default.update({ taskName: taskName }, { where: { userId: userId, id: taskId } })];
-            case 1:
-                updatedTask = (_a.sent())[0];
-                return [2 /*return*/, updatedTask];
-        }
-    });
-}); };
+var sequelize_1 = require("sequelize");
 exports.default = {
-    createTask: createTask,
-    getAllTasks: getAllTasks,
-    deleteTask: deleteTask,
-    updateTask: updateTask
+    up: function (queryInterface) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, queryInterface.createTable('Users', {
+                            id: {
+                                type: sequelize_1.DataTypes.INTEGER,
+                                primaryKey: true,
+                                autoIncrement: true,
+                                allowNull: false,
+                            },
+                            email: {
+                                type: sequelize_1.DataTypes.STRING,
+                                allowNull: false,
+                            },
+                            password: {
+                                type: sequelize_1.DataTypes.STRING,
+                                allowNull: false
+                            },
+                        })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    },
+    down: function (queryInterface) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, queryInterface.dropTable('Users')];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    },
 };
