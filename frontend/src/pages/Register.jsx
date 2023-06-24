@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "../styles/Register.module.css";
-import Logo from "../assets/Logo.svg"
+import Logo from "../assets/Logo.svg";
+import { toast } from 'react-toastify';
 
 export default function Register() {
   const [user, setUser] = useState({
@@ -30,8 +31,19 @@ export default function Register() {
       );
 
       if (request.status === 201) {
-        alert('Cadastro realizado com sucesso');
-        setTimeout(navigate('/login'), 4000)
+        toast.success('Cadastro realizado com sucesso', {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setTimeout(() => {
+          navigate('/login')
+        }, 2000);
       }
 
     } catch (err) {

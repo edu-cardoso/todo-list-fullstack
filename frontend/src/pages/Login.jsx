@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Register.module.css";
 import Logo from "../assets/Logo.svg"
+import { toast } from 'react-toastify';
 
 export default function Register() {
   const [user, setUser] = useState({
@@ -32,7 +33,21 @@ export default function Register() {
       console.log(request);
 
       if (request.status === 200) {
-        navigate('/tasks')
+        toast.success('Login efetuado com sucesso', {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+
+        setTimeout(() => {
+          navigate('/tasks')
+        }, 2000);
+        
         localStorage.setItem('token', request.data.token);
         localStorage.setItem('userId', request.data.userId);
       }
