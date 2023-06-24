@@ -102,7 +102,7 @@ export default function Tasks() {
   }
 
   useEffect(() => {
-    getTasks()
+    getTasks();
   }, [])
 
   return (
@@ -134,6 +134,10 @@ export default function Tasks() {
             </button>
         }
       </div>
+      {(inputTask.length > 0 && inputTask.length < 3) && 
+        <p className={styles.taskLength}>Sua tarefa deve conter ao menos 3 caractéres</p>
+      }
+      {tasks.length === 0 && <p className={styles.noTasks}>Nenhuma tarefa encontrada</p>}
       {tasks.map(({ id, taskName, userId }) => (
         <div key={id} className={styles.tasks}>
           <p>{taskName}</p>
