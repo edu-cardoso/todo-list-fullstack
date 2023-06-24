@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/Tasks.module.css";
 import Logo from "../assets/Logo.svg";
+import { toast } from 'react-toastify';
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -80,7 +81,7 @@ export default function Tasks() {
 
   const updateTask = async (userId, taskId) => {
     try {
-      await axios.put(
+      const request = await axios.put(
         `http://localhost:5000/tasks/${userId}/${taskId}`,
         {
           taskName: inputTask
@@ -91,10 +92,23 @@ export default function Tasks() {
           }
         }
       );
+      
+      if (request.status === 201) { 
+        toast.success('Tarefa editada com sucesso', {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
 
-      setInputTask('');
-      await getTasks();
-      setEditMode(false);
+        setInputTask('');
+        await getTasks();
+        setEditMode(false);
+      }
 
     } catch (err) {
       console.log(err)
